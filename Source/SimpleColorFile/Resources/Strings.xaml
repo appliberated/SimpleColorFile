@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="fileNameTemplate">{0}.color.html</system:String>
+
+    <system:String x:Key="fileContentTemplate" xml:space="preserve">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Color {0}&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body style=&quot;background: {0}&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </system:String>
+
+    <system:String x:Key="selectFolder">Select a folder</system:String>
+
+</ResourceDictionary>

@@ -1,0 +1,54 @@
+﻿<Application
+    x:Class="SimpleColorFile.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:SimpleColorFile"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\Strings.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="PaddedControlStyle">
+                <Setter Property="Control.Margin" Value="0,0,0,12" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Padding" Value="0,0,0,8" />
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="0,0,0,12" />
+            </Style>
+
+            <Style x:Key="HyperlinkStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+
+            <Style TargetType="{x:Type Hyperlink}">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="TextDecorations" Value="None" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="#FF666666" />
+                    </Trigger>
+                    <!--<Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Foreground" Value="#FF999999" />
+                </Trigger>-->
+                </Style.Triggers>
+            </Style>
+
+            <Style
+                x:Key="HeaderStyle"
+                BasedOn="{StaticResource {x:Type Label}}"
+                TargetType="{x:Type Label}">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontWeight" Value="Medium" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

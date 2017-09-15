@@ -1,0 +1,74 @@
+﻿<Window
+    x:Class="SimpleColorFile.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SimpleColorFile"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Simple Color File"
+    Width="800"
+    Height="600"
+    FontSize="16"
+    mc:Ignorable="d">
+
+    <Border x:Name="ColorBorder" BorderThickness="300,0,0,0">
+        <Border.BorderBrush>
+            <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+        </Border.BorderBrush>
+        <StackPanel Margin="20">
+
+            <Label Content="_Color" Target="{Binding ElementName=ColorTextBox}" />
+            <TextBox
+                x:Name="ColorTextBox"
+                Width="300"
+                HorizontalAlignment="Left"
+                Text="MediumSpringGreen"
+                TextChanged="ColorTextBox_TextChanged" />
+            <TextBlock Style="{StaticResource HyperlinkStyle}">
+                <Hyperlink Click="PickColorHyperlink_Click">
+                    <Run Text="Pick color" />
+                </Hyperlink>
+            </TextBlock>
+
+            <StackPanel x:Name="SavePanel" Margin="0,20">
+                <Label Content="Save color to" Style="{StaticResource HeaderStyle}" />
+
+                <Label Content="_Folder" Target="{Binding ElementName=FolderTextBox}" />
+                <TextBox
+                    x:Name="FolderTextBox"
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Text="T:\Temp\000\" />
+                <TextBlock Style="{StaticResource HyperlinkStyle}">
+                    <Hyperlink Click="BrowseFolderHyperlink_Click">
+                        <Run Text="Browse for folder" />
+                    </Hyperlink>
+                </TextBlock>
+
+                <Label Content="File _name" Target="{Binding ElementName=FolderTextBox}" />
+                <TextBox
+                    x:Name="FileNameTextBox"
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    IsEnabled="{Binding ElementName=CustomFileNameCheckBox, Path=IsChecked}"
+                    Text="MediumSpringGreen.color.html" />
+                <CheckBox
+                    x:Name="CustomFileNameCheckBox"
+                    Margin="0,0,0,20"
+                    Content="Custom file name"
+                    Style="{StaticResource PaddedControlStyle}"
+                    Unchecked="CustomFileNameCheckBox_Unchecked" />
+
+                <Button
+                    Padding="24,6"
+                    HorizontalAlignment="Left"
+                    Click="SaveButton_Click"
+                    Content="_Save" />
+
+                <Ellipse Fill="Black" />
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+
+</Window>
