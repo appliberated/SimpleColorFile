@@ -6,16 +6,18 @@
     xmlns:local="clr-namespace:SimpleColorFile"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Simple Color File"
-    Width="800"
-    Height="600"
     FontSize="16"
+    ResizeMode="NoResize"
+    SizeToContent="WidthAndHeight"
     mc:Ignorable="d">
 
-    <Border x:Name="ColorBorder" BorderThickness="300,0,0,0">
-        <Border.BorderBrush>
-            <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
-        </Border.BorderBrush>
-        <StackPanel Margin="20">
+    <UniformGrid Columns="2" Rows="1">
+        <Rectangle>
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+            </Rectangle.Fill>
+        </Rectangle>
+        <StackPanel Margin="40,40,80,40">
 
             <Label Content="_Color" Target="{Binding ElementName=ColorTextBox}" />
             <TextBox
@@ -30,7 +32,7 @@
                 </Hyperlink>
             </TextBlock>
 
-            <StackPanel x:Name="SavePanel" Margin="0,20">
+            <StackPanel x:Name="SavePanel" Margin="0,20,0,0">
                 <Label Content="Save color to" Style="{StaticResource HeaderStyle}" />
 
                 <Label Content="_Folder" Target="{Binding ElementName=FolderTextBox}" />
@@ -69,6 +71,6 @@
             </StackPanel>
 
         </StackPanel>
-    </Border>
+    </UniformGrid>
 
 </Window>
