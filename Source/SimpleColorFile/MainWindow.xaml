@@ -11,70 +11,65 @@
     SizeToContent="WidthAndHeight"
     mc:Ignorable="d">
 
-    <ContentControl MouseDoubleClick="BorderParentContentControl_MouseDoubleClick">
-        <Border BorderThickness="10,0,400,0">
-            <Border.BorderBrush>
-                <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
-            </Border.BorderBrush>
+    <Border BorderThickness="10,0,400,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+        <Border.BorderBrush>
+            <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+        </Border.BorderBrush>
 
-            <StackPanel Margin="80,160">
+        <StackPanel Margin="80,160">
 
-                <Label Content="Type a _color code or name" Target="{Binding ElementName=ColorTextBox}" />
+            <Label Content="Type a _color code or name" Target="{Binding ElementName=ColorTextBox}" />
+            <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
+                <TextBox
+                    x:Name="ColorTextBox"
+                    Width="300"
+                    HorizontalAlignment="Left"
+                    Text="MediumSpringGreen"
+                    TextChanged="ColorTextBox_TextChanged" />
+                <Button
+                    Click="PickColorLinkButton_Click"
+                    Content="{StaticResource PickColorLinkButtonContent}"
+                    Style="{StaticResource LinkButton}" />
+            </StackPanel>
+
+            <StackPanel x:Name="SavePanel" Margin="0,30,0,0">
+                <Label Content="Save color to _folder" Target="{Binding ElementName=FolderTextBox}" />
                 <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
                     <TextBox
-                        x:Name="ColorTextBox"
+                        x:Name="FolderTextBox"
                         Width="300"
                         HorizontalAlignment="Left"
-                        Text="MediumSpringGreen"
-                        TextChanged="ColorTextBox_TextChanged" />
+                        Text="T:\Temp\000\" />
                     <Button
-                        Click="PickColorLinkButton_Click"
-                        Content="{StaticResource PickColorLinkButtonContent}"
+                        Click="BrowseFolderLinkButton_Click"
+                        Content="{StaticResource BrowseFolderLinkButtonContent}"
+                        Style="{StaticResource LinkButton}" />
+
+                </StackPanel>
+                <Label Content="File _name" Target="{Binding ElementName=FolderTextBox}" />
+                <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
+                    <TextBox
+                        x:Name="FileNameTextBox"
+                        Width="300"
+                        HorizontalAlignment="Left"
+                        IsEnabled="False"
+                        Text="MediumSpringGreen.color.html" />
+
+                    <Button
+                        x:Name="EditAutoLinkButton"
+                        Click="EditAutoFileNameLinkButton_Click"
+                        Content="{StaticResource EditFileNameLinkButtonContent}"
                         Style="{StaticResource LinkButton}" />
                 </StackPanel>
 
-                <StackPanel x:Name="SavePanel" Margin="0,30,0,0">
-                    <Label Content="Save color to _folder" Target="{Binding ElementName=FolderTextBox}" />
-                    <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
-                        <TextBox
-                            x:Name="FolderTextBox"
-                            Width="300"
-                            HorizontalAlignment="Left"
-                            Text="T:\Temp\000\" />
-                        <Button
-                            Click="BrowseFolderLinkButton_Click"
-                            Content="{StaticResource BrowseFolderLinkButtonContent}"
-                            Style="{StaticResource LinkButton}" />
-
-                    </StackPanel>
-                    <Label Content="File _name" Target="{Binding ElementName=FolderTextBox}" />
-                    <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
-                        <TextBox
-                            x:Name="FileNameTextBox"
-                            Width="300"
-                            HorizontalAlignment="Left"
-                            IsEnabled="False"
-                            Text="MediumSpringGreen.color.html" />
-
-                        <Button
-                            x:Name="EditAutoLinkButton"
-                            Click="EditAutoFileNameLinkButton_Click"
-                            Content="{StaticResource EditFileNameLinkButtonContent}"
-                            Style="{StaticResource LinkButton}" />
-                    </StackPanel>
-
-                    <Button
-                        Margin="0,30,0,0"
-                        Padding="24,6"
-                        HorizontalAlignment="Left"
-                        Click="SaveButton_Click"
-                        Content="_Save" />
-
-                </StackPanel>
+                <Button
+                    Margin="0,30,0,0"
+                    Padding="24,6"
+                    HorizontalAlignment="Left"
+                    Click="SaveButton_Click"
+                    Content="_Save" />
 
             </StackPanel>
-
-        </Border>
-    </ContentControl>
-
+        </StackPanel>
+    </Border>
 </Window>

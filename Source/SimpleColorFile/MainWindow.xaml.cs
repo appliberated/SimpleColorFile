@@ -1,4 +1,16 @@
-﻿using SimpleColorFile.Utils;
+﻿//----------------------------------------------------------------------------
+//
+// <copyright file="MainWindow.xaml.cs" company="Appliberated">
+// Copyright (c) 2017 Appliberated
+// https://appliberated.com/
+// Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
+// </copyright>
+//
+// Description: The main window of the Simple Color File application.
+//
+//---------------------------------------------------------------------------
+
+using SimpleColorFile.Utils;
 using System;
 using System.IO;
 using System.Windows;
@@ -92,14 +104,14 @@ namespace SimpleColorFile
         // *********************************************************************
 
         /// <summary>
-        /// Border Parent Content Control -> MouseDoubleClick:
+        /// Border -> MouseLeftButtonDown:
         /// Generates and applies a random color when the user double clicks the (colored) border.
         /// </summary>
         /// <param name="sender">The object where the event handler is attached.</param>
         /// <param name="e">The event data.</param>
-        private void BorderParentContentControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ColorTextBox.Text = ColorUtils.ToHtml(ColorUtils.RandomColor());
+            if (e.ClickCount == 2) ColorTextBox.Text = ColorUtils.ToHtml(ColorUtils.RandomColor());
         }
 
         /// <summary>
@@ -182,6 +194,5 @@ namespace SimpleColorFile
             string path = Path.Combine(FolderTextBox.Text, FileNameTextBox.Text);
             File.WriteAllText(path, contents);
         }
-
     }
 }
