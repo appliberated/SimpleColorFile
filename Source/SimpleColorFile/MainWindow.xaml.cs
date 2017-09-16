@@ -62,7 +62,7 @@ namespace SimpleColorFile
                 SavePanel.IsEnabled = true;
             }
 
-            if (CustomFileNameCheckBox?.IsChecked == false)
+            if (FileNameTextBox?.IsEnabled == false)
             {
                 UpdateAutoFileName();
             }
@@ -79,7 +79,7 @@ namespace SimpleColorFile
         /// </summary>
         /// <param name="sender">The object where the event handler is attached.</param>
         /// <param name="e">The event data.</param>
-        private void PickColorHyperlink_Click(object sender, RoutedEventArgs e)
+        private void PickColorLinkButton_Click(object sender, RoutedEventArgs e)
         {
             string colorString = CommonDialogs.ShowColorDialog(_currentColor);
             if (!string.IsNullOrEmpty(colorString))
@@ -94,7 +94,7 @@ namespace SimpleColorFile
         /// </summary>
         /// <param name="sender">The object where the event handler is attached.</param>
         /// <param name="e">The event data.</param>
-        private void BrowseFolderHyperlink_Click(object sender, RoutedEventArgs e)
+        private void BrowseFolderLinkButton_Click(object sender, RoutedEventArgs e)
         {
             string path = CommonDialogs.ShowFolderBrowserDialog(FolderTextBox.Text);
             if (!string.IsNullOrEmpty(path))
@@ -110,6 +110,12 @@ namespace SimpleColorFile
             string contents = string.Format(_fileContentTemplate, ColorTextBox.Text);
             string path = Path.Combine(FolderTextBox.Text, FileNameTextBox.Text);
             File.WriteAllText(path, contents);
+        }
+
+        private void EditAutoLinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileNameTextBox.IsEnabled = !FileNameTextBox.IsEnabled;
+            EditAutoLinkButton.Content = Application.Current.FindResource(FileNameTextBox.IsEnabled ? "AutoLinkButtonContent" : "EditLinkButtonContent");
         }
     }
 }

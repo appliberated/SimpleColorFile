@@ -19,48 +19,47 @@
         <StackPanel Margin="80,160">
 
             <Label Content="Type a _color code or name" Target="{Binding ElementName=ColorTextBox}" />
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
                 <TextBox
                     x:Name="ColorTextBox"
                     Width="300"
                     HorizontalAlignment="Left"
                     Text="MediumSpringGreen"
                     TextChanged="ColorTextBox_TextChanged" />
-                <TextBlock Style="{StaticResource HyperlinkStyle}">
-                    <Hyperlink Click="PickColorHyperlink_Click">
-                        <Run Text="Pick" />
-                    </Hyperlink>
-                </TextBlock>
+                <Button
+                    Click="PickColorLinkButton_Click"
+                    Content="{StaticResource PickColorLinkButtonContent}"
+                    Style="{StaticResource LinkButton}" />
             </StackPanel>
 
             <StackPanel x:Name="SavePanel" Margin="0,30,0,0">
                 <Label Content="Save color to _folder" Target="{Binding ElementName=FolderTextBox}" />
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
                     <TextBox
                         x:Name="FolderTextBox"
                         Width="300"
                         HorizontalAlignment="Left"
                         Text="T:\Temp\000\" />
-                    <TextBlock Style="{StaticResource HyperlinkStyle}">
-                        <Hyperlink Click="BrowseFolderHyperlink_Click">
-                            <Run Text="Browse" />
-                        </Hyperlink>
-                    </TextBlock>
+                    <Button
+                        Click="BrowseFolderLinkButton_Click"
+                        Content="{StaticResource BrowseFolderLinkButtonContent}"
+                        Style="{StaticResource LinkButton}" />
+
                 </StackPanel>
                 <Label Content="File _name" Target="{Binding ElementName=FolderTextBox}" />
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
                     <TextBox
                         x:Name="FileNameTextBox"
                         Width="300"
                         HorizontalAlignment="Left"
-                        IsEnabled="{Binding ElementName=CustomFileNameCheckBox, Path=IsChecked}"
+                        IsEnabled="False"
                         Text="MediumSpringGreen.color.html" />
-                    <CheckBox
-                        x:Name="CustomFileNameCheckBox"
-                        VerticalAlignment="Center"
-                        Content="Cus_tom"
-                        Style="{StaticResource PaddedControlStyle}"
-                        Unchecked="CustomFileNameCheckBox_Unchecked" />
+
+                    <Button
+                        x:Name="EditAutoLinkButton"
+                        Click="EditAutoLinkButton_Click"
+                        Content="{StaticResource EditLinkButtonContent}"
+                        Style="{StaticResource LinkButton}" />
                 </StackPanel>
 
                 <Button

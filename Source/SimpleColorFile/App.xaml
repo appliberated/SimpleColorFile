@@ -21,14 +21,19 @@
             <SolidColorBrush
                 x:Key="ButtonMouseOverBorderBrush"
                 options:Freeze="True"
-                Color="#7a7a7a" />
+                Color="#FF7a7a7a" />
             <SolidColorBrush
                 x:Key="ButtonPressedBackgroundBrush"
                 options:Freeze="True"
-                Color="#999999" />
+                Color="#FF999999" />
+            <SolidColorBrush
+                x:Key="LinkButtonForegroundHighlighted"
+                options:Freeze="True"
+                Color="#FF666666" />
 
-
-
+            <Style x:Key="HorizontalContent">
+                <Setter Property="FrameworkElement.Margin" Value="0,0,0,12" />
+            </Style>
 
             <Style x:Key="PaddedControlStyle">
                 <Setter Property="FrameworkElement.Margin" Value="0,0,0,12" />
@@ -41,7 +46,7 @@
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="BorderBrush" Value="#999999" />
                 <Setter Property="BorderThickness" Value="2" />
-                <Setter Property="Margin" Value="0,0,10,12" />
+                <Setter Property="Margin" Value="0,0,10,0" />
                 <Setter Property="Padding" Value="4,2" />
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
@@ -50,25 +55,6 @@
                     <Trigger Property="IsFocused" Value="True">
                         <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                     </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <Style x:Key="HyperlinkStyle" TargetType="{x:Type TextBlock}">
-                <Setter Property="Margin" Value="0,0,0,10" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-            </Style>
-
-            <Style TargetType="{x:Type Hyperlink}">
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
-                <Setter Property="TextDecorations" Value="None" />
-
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Foreground" Value="#FF666666" />
-                    </Trigger>
-                    <!--<Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Foreground" Value="#FF999999" />
-                </Trigger>-->
                 </Style.Triggers>
             </Style>
 
@@ -112,6 +98,26 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <!--  Link Button Style  -->
+            <!--  Based on https://github.com/MahApps/MahApps.Metro/blob/develop/src/MahApps.Metro/MahApps.Metro/Styles/VS/Button.xaml  -->
+            <Style x:Key="LinkButton" TargetType="{x:Type Button}">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter RecognizesAccessKey="True" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Foreground" Value="{DynamicResource LinkButtonForegroundHighlighted}" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
         </ResourceDictionary>
