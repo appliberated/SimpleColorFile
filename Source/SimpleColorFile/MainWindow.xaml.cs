@@ -10,6 +10,7 @@
 //
 //---------------------------------------------------------------------------
 
+using Microsoft.Win32;
 using SimpleColorFile.Utils;
 using System;
 using System.IO;
@@ -64,10 +65,10 @@ namespace SimpleColorFile
         /// </summary>
         private void BadColor()
         {
-            if (SavePanel != null)
+            if (SaveButton != null)
             {
                 CurrentColorBrush.Color = Colors.Transparent;
-                SavePanel.IsEnabled = false;
+                SaveButton.IsEnabled = false;
             }
         }
 
@@ -78,25 +79,12 @@ namespace SimpleColorFile
         {
             _currentColor = color;
 
-            CurrentColorBrush.Color = _currentColor;
+            if (CurrentColorBrush != null) CurrentColorBrush.Color = _currentColor;
 
-            if (SavePanel != null)
+            if (SaveButton != null)
             {
-                SavePanel.IsEnabled = true;
+                SaveButton.IsEnabled = true;
             }
-
-            if (FileNameTextBox?.IsEnabled == false)
-            {
-                UpdateAutoFileName();
-            }
-        }
-
-        /// <summary>
-        /// Updates the file name based on the color value.
-        /// </summary>
-        private void UpdateAutoFileName()
-        {
-            FileNameTextBox.Text = string.Format(_fileNameTemplate, ColorTextBox.Text);
         }
 
         // *********************************************************************
@@ -153,36 +141,6 @@ namespace SimpleColorFile
         }
 
         /// <summary>
-        /// Browse For Folder Link Button -> Click:
-        /// Opens a Folder Browser dialog box (from Windows Forms) to allow the user to visually select a folder path.
-        /// </summary>
-        /// <param name="sender">The object where the event handler is attached.</param>
-        /// <param name="e">The event data.</param>
-        private void BrowseFolderLinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            string path = CommonDialogs.ShowFolderBrowserDialog(FolderTextBox.Text);
-            if (!string.IsNullOrEmpty(path))
-            {
-                FolderTextBox.Text = path;
-            }
-        }
-
-        /// <summary>
-        /// Edit/Auto File Name Link Button -> Click:
-        /// Enables the File Name text box to let the user enter a custom file name, or disables it to autogenerate
-        /// the file name.
-        /// </summary>
-        /// <param name="sender">The object where the event handler is attached.</param>
-        /// <param name="e">The event data.</param>
-        private void EditAutoFileNameLinkButton_Click(object sender, RoutedEventArgs e)
-        {
-            FileNameTextBox.IsEnabled = !FileNameTextBox.IsEnabled;
-            EditAutoLinkButton.Content = Application.Current.FindResource(
-                FileNameTextBox.IsEnabled ? "AutoFileNameLinkButtonContent" : "EditFileNameLinkButtonContent");
-            if (!FileNameTextBox.IsEnabled) UpdateAutoFileName();
-        }
-
-        /// <summary>
         /// Save Button -> Click:
         /// Saves the current color to the specified Simple Color File.
         /// </summary>
@@ -190,9 +148,19 @@ namespace SimpleColorFile
         /// <param name="e">The event data.</param>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            string contents = string.Format(_fileContentTemplate, ColorTextBox.Text);
-            string path = Path.Combine(FolderTextBox.Text, FileNameTextBox.Text);
-            File.WriteAllText(path, contents);
+            // Although we are targeting .NET Framework 3.5, we will get the "modern" Save File Dialog 
+            // on Windows 10 because we are using <supportedRuntime version="v4.0" /> as the first line in app.config
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                DefaultExt = ".html",
+                FileName = string.Format(_fileNameTemplate, ColorTextBox.Text),
+                Filter = "Simple Color Files (.html)|*.html"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string contents = string.Format(_fileContentTemplate, ColorTextBox.Text);
+                File.WriteAllText(saveFileDialog.FileName, contents);
+            }
         }
     }
 }

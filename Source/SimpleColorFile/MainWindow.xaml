@@ -11,65 +11,52 @@
     SizeToContent="WidthAndHeight"
     mc:Ignorable="d">
 
-    <Border BorderThickness="10,0,400,0" MouseLeftButtonDown="Border_MouseLeftButtonDown">
-        <Border.BorderBrush>
-            <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
-        </Border.BorderBrush>
+    <Grid Grid.IsSharedSizeScope="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" SharedSizeGroup="A" />
+            <RowDefinition Height="*" SharedSizeGroup="A" />
+        </Grid.RowDefinitions>
+        <!--<Border BorderThickness="0,0,0,200" MouseLeftButtonDown="Border_MouseLeftButtonDown">
+            <Border.BorderBrush>
+                <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+            </Border.BorderBrush>
+        </Border>-->
 
-        <StackPanel Margin="80,160">
+        <StackPanel Margin="80">
 
-            <Label Content="Type a _color code or name" Target="{Binding ElementName=ColorTextBox}" />
-            <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
-                <TextBox
-                    x:Name="ColorTextBox"
-                    Width="300"
-                    HorizontalAlignment="Left"
-                    Text="MediumSpringGreen"
-                    TextChanged="ColorTextBox_TextChanged" />
-                <Button
-                    Click="PickColorLinkButton_Click"
-                    Content="{StaticResource PickColorLinkButtonContent}"
-                    Style="{StaticResource LinkButton}" />
-            </StackPanel>
+            <!--<Label
+                Margin="0,0,0,10"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                Content="Type a _color code or name"
+                Target="{Binding ElementName=ColorTextBox}" />-->
+            <TextBox
+                x:Name="ColorTextBox"
+                Width="300"
+                Margin="0,0,0,10"
+                Padding="0,5"
+                HorizontalContentAlignment="Center"
+                Text="MediumSpringGreen"
+                TextChanged="ColorTextBox_TextChanged" />
+            <Button
+                HorizontalContentAlignment="Center"
+                Click="PickColorLinkButton_Click"
+                Content="{StaticResource PickColorLinkButtonContent}"
+                Style="{StaticResource LinkButton}" />
 
-            <StackPanel x:Name="SavePanel" Margin="0,30,0,0">
-                <Label Content="Save color to _folder" Target="{Binding ElementName=FolderTextBox}" />
-                <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
-                    <TextBox
-                        x:Name="FolderTextBox"
-                        Width="300"
-                        HorizontalAlignment="Left"
-                        Text="T:\Temp\000\" />
-                    <Button
-                        Click="BrowseFolderLinkButton_Click"
-                        Content="{StaticResource BrowseFolderLinkButtonContent}"
-                        Style="{StaticResource LinkButton}" />
-
-                </StackPanel>
-                <Label Content="File _name" Target="{Binding ElementName=FolderTextBox}" />
-                <StackPanel Orientation="Horizontal" Style="{StaticResource HorizontalContent}">
-                    <TextBox
-                        x:Name="FileNameTextBox"
-                        Width="300"
-                        HorizontalAlignment="Left"
-                        IsEnabled="False"
-                        Text="MediumSpringGreen.color.html" />
-
-                    <Button
-                        x:Name="EditAutoLinkButton"
-                        Click="EditAutoFileNameLinkButton_Click"
-                        Content="{StaticResource EditFileNameLinkButtonContent}"
-                        Style="{StaticResource LinkButton}" />
-                </StackPanel>
-
-                <Button
-                    Margin="0,30,0,0"
-                    Padding="24,6"
-                    HorizontalAlignment="Left"
-                    Click="SaveButton_Click"
-                    Content="_Save" />
-
-            </StackPanel>
+            <Button
+                x:Name="SaveButton"
+                Margin="0,30,0,0"
+                Padding="24,6"
+                HorizontalAlignment="Center"
+                Click="SaveButton_Click"
+                Content="_Save" />
         </StackPanel>
-    </Border>
+
+        <Rectangle Grid.Row="1">
+            <Rectangle.Fill>
+                <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+            </Rectangle.Fill>
+        </Rectangle>
+    </Grid>
 </Window>

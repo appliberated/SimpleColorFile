@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
-    <system:String x:Key="PickColorLinkButtonContent">_Pick</system:String>
+    <system:String x:Key="PickColorLinkButtonContent">_Pick color</system:String>
     <system:String x:Key="BrowseFolderLinkButtonContent">_Browse</system:String>
 
     <system:String x:Key="EditFileNameLinkButtonContent">_Edit</system:String>
     <system:String x:Key="AutoFileNameLinkButtonContent">_Auto</system:String>
 
-    <system:String x:Key="fileNameTemplate">{0}.color.html</system:String>
+    <system:String x:Key="fileNameTemplate">Color{0}.html</system:String>
 
     <system:String x:Key="fileContentTemplate" xml:space="preserve">&lt;html&gt;
     &lt;head&gt;
