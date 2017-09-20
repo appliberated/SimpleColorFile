@@ -2,17 +2,16 @@
 //
 // <copyright file="MainWindow.xaml.cs" company="Appliberated">
 // Copyright (c) 2017 Appliberated
-// https://appliberated.com/
-// Licensed under the Apache License, Version 2.0. See LICENSE file in the project root for full license information.
+// https://appliberated.com
+// Licensed under the MIT. See LICENSE file in the project root for full license information.
 // </copyright>
-//
-// Description: The main window of the Simple Color File application.
 //
 //---------------------------------------------------------------------------
 
 namespace SimpleColorFile
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Windows;
     using System.Windows.Controls;
@@ -53,8 +52,8 @@ namespace SimpleColorFile
         {
             this.InitializeComponent();
 
-            this.fileNameTemplate = (string)Application.Current.FindResource("fileNameTemplate");
-            this.fileContentTemplate = (string)Application.Current.FindResource("fileContentTemplate");
+            this.fileNameTemplate = this.FindResource("fileNameTemplate") as string;
+            this.fileContentTemplate = this.FindResource("fileContentTemplate") as string;
         }
 
         // *********************************************************************
@@ -92,13 +91,22 @@ namespace SimpleColorFile
             }
         }
 
-        private void DoSaveColorFile(string fileName)
+        /// <summary>
+        /// The main functionality method: creates the specified Simple Color File and writes the specified color.
+        /// </summary>
+        /// <param name="colorString">The color string to write.</param>
+        /// <param name="fileName">The Simple Color File to write to.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Catching a large number of exceptions and informing the user")]
+        private void DoSaveColorFile(string colorString, string fileName)
         {
             try
             {
-                string contents = string.Format(this.fileContentTemplate, this.ColorTextBox.Text);
+                string contents = string.Format(CultureInfo.InvariantCulture, this.fileContentTemplate, colorString);
                 File.WriteAllText(fileName, contents);
-                this.ShowToast("Color saved");
+                this.ShowToast(this.FindResource("ColorSavedToast") as string);
             }
             catch (Exception ex)
             {
@@ -106,6 +114,10 @@ namespace SimpleColorFile
             }
         }
 
+        /// <summary>
+        /// Shows a toast message.
+        /// </summary>
+        /// <param name="message">The message string to show.</param>
         private void ShowToast(string message)
         {
             this.ToastTextBlock.Text = message;
@@ -119,12 +131,12 @@ namespace SimpleColorFile
         // *********************************************************************
 
         /// <summary>
-        /// Border -> MouseLeftButtonDown:
-        /// Generates and applies a random color when the user double clicks the (colored) border.
+        /// Color Rectangle -> MouseLeftButtonDown:
+        /// Generates and applies a random color when the user double clicks the colored rectangle.
         /// </summary>
         /// <param name="sender">The object where the event handler is attached.</param>
         /// <param name="e">The event data.</param>
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ColorRectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
             {
@@ -163,10 +175,17 @@ namespace SimpleColorFile
         /// <param name="e">The event data.</param>
         private void PickColorLinkButton_Click(object sender, RoutedEventArgs e)
         {
-            string colorString = CommonDialogs.ShowColorDialog(this.currentColor);
-            if (!string.IsNullOrEmpty(colorString))
+            // Use the ColorDialog class from Windows Forms (WPF does not contain a standard color common dialog)
+            using (var colorDialog = new System.Windows.Forms.ColorDialog())
             {
-                this.ColorTextBox.Text = colorString;
+                colorDialog.FullOpen = true;
+                colorDialog.Color = ColorUtils.ToSDColor(this.currentColor);
+
+                // Show the Color dialog and apply any new selected color
+                if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    this.ColorTextBox.Text = ColorUtils.ToHtml(colorDialog.Color);
+                }
             }
         }
 
@@ -182,14 +201,14 @@ namespace SimpleColorFile
             // on Windows 10 because we are using <supportedRuntime version="v4.0" /> as the first line in app.config
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
-                DefaultExt = ".html",
-                FileName = string.Format(this.fileNameTemplate, this.ColorTextBox.Text),
-                Filter = "Simple Color Files (.html)|*.html"
+                DefaultExt = this.FindResource("SaveFileDialogDefaultExt") as string,
+                FileName = string.Format(CultureInfo.InvariantCulture, this.fileNameTemplate, this.ColorTextBox.Text),
+                Filter = this.FindResource("SaveFileDialogFilter") as string
             };
             if (saveFileDialog.ShowDialog() == true)
             {
                 // Save the color to the Simple Color File selected by the user in the Save File Dialog
-                this.DoSaveColorFile(saveFileDialog.FileName);
+                this.DoSaveColorFile(this.ColorTextBox.Text, saveFileDialog.FileName);
             }
         }
     }

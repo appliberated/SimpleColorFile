@@ -1,4 +1,4 @@
-﻿<Window x:Class="SimpleColorFile.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:SimpleColorFile" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Simple Color File" FontSize="16" ResizeMode="NoResize" SizeToContent="WidthAndHeight" mc:Ignorable="d">
+﻿<Window x:Class="SimpleColorFile.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:SimpleColorFile" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Title="Simple Color File" FontSize="16" ResizeMode="NoResize" SizeToContent="WidthAndHeight" mc:Ignorable="d" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen">
 
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
@@ -8,18 +8,18 @@
 
         <StackPanel Margin="100">
 
-            <TextBox x:Name="ColorTextBox" Width="300" Margin="0,0,0,10" Padding="0,5" HorizontalContentAlignment="Center" Text="MediumSpringGreen" TextChanged="ColorTextBox_TextChanged" />
+            <TextBox x:Name="ColorTextBox" Width="300" Margin="0,0,0,10" Padding="0,5" HorizontalContentAlignment="Center" Text="{StaticResource ColorTextBoxDefaultText}" TextChanged="ColorTextBox_TextChanged" ToolTip="{StaticResource ColorTextBoxTooltip}" />
             <Button HorizontalContentAlignment="Center" Click="PickColorLinkButton_Click" Content="{StaticResource PickColorLinkButtonContent}" Style="{StaticResource LinkButton}" />
 
-            <Button x:Name="SaveButton" Margin="0,30,0,0" Padding="24,6" Width="100" HorizontalAlignment="Center" Click="SaveButton_Click" Content="_Save" />
+            <Button x:Name="SaveButton" Margin="0,30,0,0" Padding="24,6" Width="100" HorizontalAlignment="Center" Click="SaveButton_Click" Content="{StaticResource SaveButtonContent}" />
         </StackPanel>
 
-        <Rectangle Grid.Row="1">
+        <Rectangle Grid.Row="1" MouseDown="ColorRectangle_MouseLeftButtonDown">
             <Rectangle.Fill>
-                <SolidColorBrush x:Name="CurrentColorBrush" Color="Orange" />
+                <SolidColorBrush x:Name="CurrentColorBrush" Color="OrangeRed" />
             </Rectangle.Fill>
         </Rectangle>
 
-        <TextBlock x:Name="ToastTextBlock" Foreground="White" Text="Color Saved" Grid.Row="1" Margin="0,0,0,50" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="#AA000000" Opacity="0" MaxWidth="400" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow"/>
+        <TextBlock x:Name="ToastTextBlock" Foreground="White" Text="{StaticResource ColorSavedToast}" Grid.Row="1" Margin="0,0,0,50" Padding="10,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Background="#AA000000" Opacity="0" MaxWidth="400" TextTrimming="CharacterEllipsis" TextWrapping="WrapWithOverflow" />
     </Grid>
 </Window>

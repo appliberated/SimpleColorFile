@@ -2,15 +2,17 @@
     <Application.Resources>
 
         <ResourceDictionary>
+
+            <!-- Merge the strings resource dictionary -->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources\Strings.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <!--  Colors  -->
+            <!-- Colors -->
             <SolidColorBrush x:Key="LinkButtonForegroundHighlighted" options:Freeze="True" Color="#FF666666" />
 
-            <!--  Link Button Style  -->
-            <!--  Based on https://github.com/MahApps/MahApps.Metro/blob/develop/src/MahApps.Metro/MahApps.Metro/Styles/VS/Button.xaml  -->
+            <!-- Link Button Style -->
+            <!-- Based on https://github.com/MahApps/MahApps.Metro/blob/develop/src/MahApps.Metro/MahApps.Metro/Styles/VS/Button.xaml -->
             <Style x:Key="LinkButton" TargetType="{x:Type Button}">
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
@@ -29,6 +31,7 @@
                 </Style.Triggers>
             </Style>
 
+            <!-- The storyboard for showing and hiding a toast message -->
             <Storyboard x:Key="ToastStoryboard">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
                     <LinearDoubleKeyFrame Value="1.0" KeyTime="00:00:00.500" />

@@ -1,16 +1,16 @@
-﻿<ResourceDictionary
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:system="clr-namespace:System;assembly=mscorlib">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <!-- User Interface Strings -->
+    <system:String x:Key="ColorTextBoxDefaultText">OrangeRed</system:String>
+    <system:String x:Key="ColorTextBoxTooltip">Type a hexadecimal color code, or a color name</system:String>
     <system:String x:Key="PickColorLinkButtonContent">_Pick color</system:String>
-    <system:String x:Key="BrowseFolderLinkButtonContent">_Browse</system:String>
+    <system:String x:Key="SaveButtonContent">_Save</system:String>
+    <system:String x:Key="SaveFileDialogDefaultExt">.html</system:String>
+    <system:String x:Key="SaveFileDialogFilter">Simple Color Files (.html)|*.html</system:String>
+    <system:String x:Key="ColorSavedToast">Color saved</system:String>
 
-    <system:String x:Key="EditFileNameLinkButtonContent">_Edit</system:String>
-    <system:String x:Key="AutoFileNameLinkButtonContent">_Auto</system:String>
-
+    <!-- Main functionality template strings -->
     <system:String x:Key="fileNameTemplate">Color{0}.html</system:String>
-
     <system:String x:Key="fileContentTemplate" xml:space="preserve">&lt;html&gt;
     &lt;head&gt;
         &lt;title&gt;Color {0}&lt;/title&gt;
@@ -19,7 +19,5 @@
     &lt;/body&gt;
 &lt;/html&gt;
     </system:String>
-
-    <system:String x:Key="selectFolder">Select a folder</system:String>
 
 </ResourceDictionary>
