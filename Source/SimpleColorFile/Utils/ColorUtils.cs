@@ -1,9 +1,9 @@
-﻿using System;
-using SDColor = System.Drawing.Color;
-using SWMColor = System.Windows.Media.Color;
-
-namespace SimpleColorFile.Utils
+﻿namespace SimpleColorFile.Utils
 {
+    using System;
+    using SDColor = System.Drawing.Color;
+    using SWMColor = System.Windows.Media.Color;
+
     public static class ColorUtils
     {
         private static Random random = new Random();
@@ -18,7 +18,7 @@ namespace SimpleColorFile.Utils
 
         public static string ToHtml(SWMColor color) => System.Drawing.ColorTranslator.ToHtml(ToSDColor(color));
 
-        public static SWMColor RandomColor() => 
+        public static SWMColor RandomColor() =>
             SWMColor.FromRgb((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
     }
 }
