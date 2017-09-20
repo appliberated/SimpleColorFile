@@ -9,12 +9,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SimpleColorFile")]
+[assembly: AssemblyTitle("Simple Color File")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SimpleColorFile")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("Appliberated")]
+[assembly: AssemblyProduct("Simple Color File")]
+[assembly: AssemblyCopyright("Copyright ©  2017 Appliberated")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
