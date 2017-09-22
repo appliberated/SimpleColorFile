@@ -54,6 +54,8 @@ namespace SimpleColorFile
 
             this.fileNameTemplate = this.FindResource("fileNameTemplate") as string;
             this.fileContentTemplate = this.FindResource("fileContentTemplate") as string;
+
+            this.FocusColorTextBox();
         }
 
         // *********************************************************************
@@ -126,6 +128,18 @@ namespace SimpleColorFile
             sb.Begin(this.ToastTextBlock);
         }
 
+        /// <summary>
+        /// Sets focus to the Color text box and moves the cursor at the end of the text.
+        /// </summary>
+        private void FocusColorTextBox()
+        {
+            if (this.ColorTextBox != null)
+            {
+                this.ColorTextBox.Focus();
+                this.ColorTextBox.Select(this.ColorTextBox.Text.Length, 0);
+            }
+        }
+
         // *********************************************************************
         // User Interface Events
         // *********************************************************************
@@ -141,6 +155,7 @@ namespace SimpleColorFile
             if (e.ClickCount == 2)
             {
                 this.ColorTextBox.Text = ColorUtils.ToHtml(ColorUtils.RandomColor());
+                this.FocusColorTextBox();
             }
         }
 
@@ -185,6 +200,7 @@ namespace SimpleColorFile
                 if (colorDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     this.ColorTextBox.Text = ColorUtils.ToHtml(colorDialog.Color);
+                    this.FocusColorTextBox();
                 }
             }
         }
@@ -209,6 +225,7 @@ namespace SimpleColorFile
             {
                 // Save the color to the Simple Color File selected by the user in the Save File Dialog
                 this.DoSaveColorFile(this.ColorTextBox.Text, saveFileDialog.FileName);
+                this.FocusColorTextBox();
             }
         }
     }
